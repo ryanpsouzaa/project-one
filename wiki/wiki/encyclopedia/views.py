@@ -4,7 +4,7 @@ from django import forms
 
 from . import util
 
-
+import markdown2
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -23,7 +23,7 @@ def new_page(request):
             if title in util.list_entries():
                 return render(request, "encyclopedia/create-page.html", {
                     "form" : form,
-                    "message" : f"Title: {title} is already created"
+                    "erro" : f"Title: {title} is already created"
                 })
             content = form.cleaned_data["content"]
             util.save_entry(title, content)
@@ -38,9 +38,11 @@ def new_page(request):
     })
 
 def get_page(request, title):
-    page = util.get_entry(title)
+    page_markdown = util.get_entry(title)
+    page_html = markdown2.markdown(f"{page_markdown}")
     return render(request, "encyclopedia/page.html", {
-        "page" : page
+        "page_title": title,
+        "page" : page_html,
     })
 
 

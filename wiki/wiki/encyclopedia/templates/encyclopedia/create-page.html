@@ -5,6 +5,13 @@ New Page
 {% endblock %}
 
 {% block body %}
+
+    {% if erro %}
+        <div class="alert alert-danger" role="alert">
+            {{ erro }}
+        </div>
+    {% endif %}
+
     <form method="post" action="{% url 'encyclopedia:new_page' %}">
         {% csrf_token %}
         {{form}}

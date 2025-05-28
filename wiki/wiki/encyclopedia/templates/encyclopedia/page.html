@@ -1,9 +1,9 @@
 {% extends "encyclopedia/layout.html" %}
 
 {% block title %}
-    {{ page_name }}
+    {{ page_title }}
 {% endblock %}
 
 {% block body %}
-    {{ page }}
+    {{ page |safe }}
 {% endblock %}
