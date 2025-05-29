@@ -1,0 +1,17 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title%}
+    Similar Search
+{% endblock %}
+
+{% block body %}
+    <h1>Similar entries</h1>
+    <ul>
+    {% for entry in similar_entries %}
+        <li>
+        <a href="{% url 'encyclopedia:get_page' entry %}">{{ entry }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
