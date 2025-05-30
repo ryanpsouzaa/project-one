@@ -5,6 +5,17 @@
 {% endblock %}
 
 {% block body %}
-    <a href="{% url 'encyclopedia:edit_page' page_title%}">Edit Page</a>
-    {{ page |safe }}
+    <body class="page-body">
+        <a class="page-edit" href="{% url 'encyclopedia:edit_page' page_title %}">Edit Page</a>
+
+        <div class="page-view-title-div">
+            <h1 class="page-title">{{ page_title }}</h1>
+        </div>
+            <h2 class="page-view-subtitle">Content:</h2>
+
+        <div class="page-content">
+            {{ page_content |safe }}
+        </div>
+    </body>
+
 {% endblock %}

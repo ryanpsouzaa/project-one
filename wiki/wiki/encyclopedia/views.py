@@ -50,7 +50,7 @@ def get_page(request, title):
         page_html = markdown2.markdown(f"{page_markdown}")
         return render(request, "encyclopedia/page.html", {
             "page_title": title,
-            "page": page_html,
+            "page_content": page_html,
         })
 
 def search(request):

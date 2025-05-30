@@ -5,14 +5,21 @@
 {% endblock %}
 
 {% block body %}
-    <h1>All Pages</h1>
+    <body>
+    <div class="page-body">
+        <div class="page-title-div">
+            <h1 class="page-title">All Pages</h1>
+        </div>
 
-    <ul>
-        {% for entry in entries %}
-            <li>
-                <a href="{% url 'encyclopedia:get_page' entry %}">{{ entry }}</a>
-            </li>
-        {% endfor %}
-    </ul>
+
+        <ul class="list-entries">
+            {% for entry in entries %}
+                <li>
+                    <a class="entry" href="{% url 'encyclopedia:get_page' entry %}">{{ entry }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    </body>
 
 {% endblock %}
