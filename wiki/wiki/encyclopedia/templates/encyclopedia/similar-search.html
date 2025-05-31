@@ -1,17 +1,24 @@
 {% extends "encyclopedia/layout.html" %}
 
-{% block title%}
+{% block title %}
     Similar Search
 {% endblock %}
 
 {% block body %}
-    <h1>Similar entries</h1>
-    <ul>
-    {% for entry in similar_entries %}
-        <li>
-        <a href="{% url 'encyclopedia:get_page' entry %}">{{ entry }}</a>
-        </li>
-    {% endfor %}
-    </ul>
+
+    <body class="page-body">
+        <div class="page-title-div">
+            <h1 class="page-title">Similar entries</h1>
+        </div>
+
+        <label class="similar-label" for="list-entries">Similar entries for search: "{{ title }}"</label>
+        <ul class="list-entries">
+            {% for entry in similar_entries %}
+                <li>
+                    <a class="entry" href="{% url 'encyclopedia:get_page' entry %}">{{ entry }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </body>
 
 {% endblock %}

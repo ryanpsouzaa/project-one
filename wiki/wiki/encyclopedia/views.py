@@ -63,12 +63,13 @@ def similar_search(request, title):
 
     if len(similar_search) == 0:
         return render(request, "encyclopedia/error.html", {
-            "error": f"Page {title} not found"
+            "error": f"Page '{title}' not found"
         })
 
     else:
         return render(request, "encyclopedia/similar-search.html", {
-            "similar_entries": similar_search
+            "similar_entries": similar_search,
+            "title" : title
         })
 
 

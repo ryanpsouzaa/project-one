@@ -5,20 +5,24 @@
 {% endblock %}
 
 {% block body %}
-    <body>
+    <body class="page-body">
     {% if error %}
         <div class="alert alert-danger" role="alert">
             {{ error }}
         </div>
     {% endif %}
 
-    <form action="{% url 'encyclopedia:edit_page' title %}" method="post">
+    <div class="page-title-div">
+        <h1 class="page-title">Editing: {{ title }}</h1>
+    </div>
+
+    <form class="edit-form" action="{% url 'encyclopedia:edit_page' title %}" method="post">
         {% csrf_token %}
 
-        <label for="content">Content:</label>
-        <textarea name="content">{{ content|safe|default:'' }}</textarea>
+        <label class="edit-form-label" for="content">Content:</label>
+        <textarea class="edit-form-content" name="content">{{ content|safe|default:'' }}</textarea>
 
-        <input type="submit" value="Edit">
+        <input class="edit-form-submit" type="submit" value="Edit">
     </form>
     </body>
 

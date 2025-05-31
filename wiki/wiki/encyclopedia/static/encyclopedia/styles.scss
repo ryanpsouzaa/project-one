@@ -37,7 +37,6 @@ body {
   flex-direction: column;
 
   .page-title-div {
-    align-self: center;
     border-bottom: 1px solid $border-color;
     width: 80%;
     text-align: center;
@@ -143,17 +142,7 @@ textarea {
   width: 160px;
 }
 
-.page-view-title-div {
-    align-self: center;
-    width: 100%;
-    text-align: center;
-  }
-
-.page-view-subtitle{
-  border-bottom: 1px solid $border-color;
-  margin-top: 20px;
-}
-
+/* page.html */
 .page-content-label{
   display: block;
   margin-top: 20px;
@@ -185,12 +174,11 @@ textarea {
   color: $title-color;
 }
 
-/* todo: organizar css usando sass e falta estilizar edit page */
-
 .page-content-edit:active{
   background: $active-color;
 }
 
+/* edit-page.html */
 .page-edit{
   border: 1px solid $border-color;
   border-radius: 24px;
@@ -225,7 +213,6 @@ textarea {
 
   }
 
-  /* form content */
   .page-form-content{
     @extend %form-field;
     height: 400px;
@@ -236,7 +223,6 @@ textarea {
     outline: none;
   }
 
-  /* button submit */
   .page-form-submit{
     @extend %form-field;
     width: 400px;
@@ -260,4 +246,42 @@ textarea {
     padding-left: 10px;
     letter-spacing: 1px;
   }
+}
+
+/* edit-page.html */
+
+.edit-form{
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-form-submit{
+  @extend %form-field;
+  width: 400px;
+  margin-top: 20px;
+}
+
+.edit-form-submit:hover{
+  border: 2px solid $active-color;
+}
+
+.edit-form-submit:active{
+  background: $active-color;
+}
+
+.edit-form-content{
+  @extend %form-field;
+  height: 400px;
+  width: 85%;
+}
+
+.edit-form-label{
+  display: block;
+  margin-top: 10px;
+}
+
+/* similar-search.html */
+
+.similar-label{
+  margin-top: 10px;
 }
