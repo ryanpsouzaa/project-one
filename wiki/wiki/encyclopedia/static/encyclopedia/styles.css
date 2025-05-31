@@ -1,12 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
 .sidebar-options:hover, .list-entries .entry:hover {
-  color: black;
-  text-decoration: underline overline black;
+  color: #174ea6;
+  text-decoration: underline #174ea6;
+}
+
+.page-form .page-form-submit, .page-form .page-form-content, .page-form .page-form-title, .page-content-edit, .page-content, .search {
+  line-height: 1.5;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: 1px 1px 1px #999;
+  letter-spacing: 1px;
 }
 
 body {
+  font-family: "Inter", system-ui, sans-serif;
   margin: 0;
   background-color: #f8f9fa;
-  font-family: Arial, sans-serif;
+  letter-spacing: 1px;
 }
 
 .page-body {
@@ -15,12 +25,15 @@ body {
 }
 .page-body .page-title-div {
   align-self: center;
-  border-bottom: 1px solid black;
-  width: 100%;
+  border-bottom: 1px solid #ccc;
+  width: 80%;
   text-align: center;
 }
 .page-body .page-title {
   font-weight: 700;
+  font-size: 32px;
+  margin-top: 10px;
+  color: #474747;
   padding-bottom: 1px;
 }
 
@@ -29,21 +42,19 @@ body {
   flex-direction: column;
   gap: 10px;
   margin-top: 20px;
+  padding: 30px;
   list-style: none;
 }
 .list-entries .entry {
   text-decoration: none;
-  font-size: 30px;
-  color: #3366cc;
+  font-size: 28px;
+  font-weight: 500;
+  color: #1a73e8;
   font-family: system-ui, sans-serif;
+  margin-bottom: 12px;
 }
 code {
   white-space: pre;
-}
-
-h1 {
-  margin-top: 0;
-  padding-top: 20px;
 }
 
 textarea {
@@ -59,25 +70,36 @@ textarea {
   width: 100%;
   font-size: 15px;
   line-height: 15px;
-  padding-left: 5px;
+  padding-left: 10px;
   margin-left: 5px;
-  border: 1px solid black;
-  border-radius: 24px;
   height: 25px;
 }
 
+.search:focus {
+  outline: none;
+}
+
 .sidebar {
-  background-color: #eceff1;
+  background-color: #e9ecef;
   height: 100vh;
   padding: 20px;
+  border-radius: 8px;
+  font-weight: 500;
 }
 
 .sidebar-options {
+  margin-bottom: 10px;
   text-decoration: none;
   color: #3366cc;
 }
 
+.sidebar-options:hover {
+  color: #174ea6;
+}
+
 .sidebar h2 {
+  font-family: Inter, system-ui, sans-serif;
+  color: #474747;
   margin-top: 5px;
   text-align: center;
   font-weight: 700;
@@ -88,7 +110,7 @@ textarea {
   margin-bottom: 10px;
   margin-top: 10px;
   cursor: pointer;
-  width: 150px;
+  width: 160px;
 }
 
 .page-view-title-div {
@@ -98,26 +120,97 @@ textarea {
 }
 
 .page-view-subtitle {
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #ccc;
+  margin-top: 20px;
+}
+
+.page-content-label {
+  display: block;
+  margin-top: 20px;
+  margin-left: 50px;
 }
 
 .page-content {
-  margin-left: 20px;
+  font-family: system-ui, sans-serif;
+  height: 500px;
+  width: 85%;
+  overflow: auto;
+  padding: 12px;
+  margin-left: 50px;
+  margin-bottom: 20px;
+}
+
+.page-content-edit {
+  margin-left: 50px;
+  padding: 10px;
+  color: #474747;
+}
+
+.page-content-edit:hover {
+  border: 2px solid #B6B0B0;
+  text-decoration: none;
+  color: #474747;
+}
+
+/* todo: organizar css usando sass e falta estilizar edit page */
+.page-content-edit:active {
+  background: #B6B0B0;
 }
 
 .page-edit {
-  border: 1px solid black;
+  border: 1px solid #ccc;
   border-radius: 24px;
   padding: 10px;
-  margin-left: 10px;
-  background: #eceff1;
+  margin-left: 5px;
+  background: #e9ecef;
   color: #3366cc;
-  margin-top: 100px;
 }
 
 .page-edit:hover {
+  border: 2px solid #ccc;
   background-color: white;
-  color: black;
+  color: #174ea6;
+}
+
+/* create-page.html */
+.page-form {
+  display: flex;
+  flex-direction: column;
+  /* form content */
+  /* button submit */
+}
+.page-form .page-form-title {
+  width: 400px;
+  padding-left: 10px;
+}
+.page-form .page-form-title:focus {
+  outline: none;
+}
+.page-form .page-form-content {
+  height: 400px;
+  padding-left: 10px;
+}
+.page-form .page-form-content:focus {
+  outline: none;
+}
+.page-form .page-form-submit {
+  width: 400px;
+  margin-top: 20px;
+  color: #474747;
+}
+.page-form .page-form-submit:hover {
+  border: 2px solid #B6B0B0;
+}
+.page-form .page-form-submit:active {
+  background: #B6B0B0;
+}
+.page-form label {
+  color: #474747;
+  display: block;
+  margin-bottom: 0;
+  margin-top: 10px;
+  padding-left: 10px;
+  letter-spacing: 1px;
 }
 
 /*# sourceMappingURL=styles.css.map */

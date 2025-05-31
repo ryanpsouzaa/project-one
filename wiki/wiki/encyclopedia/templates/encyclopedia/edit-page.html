@@ -5,10 +5,21 @@
 {% endblock %}
 
 {% block body %}
+    <body>
+    {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
+
     <form action="{% url 'encyclopedia:edit_page' title %}" method="post">
         {% csrf_token %}
-        {{ form }}
+
+        <label for="content">Content:</label>
+        <textarea name="content">{{ content|safe|default:'' }}</textarea>
+
         <input type="submit" value="Edit">
     </form>
+    </body>
 
 {% endblock %}

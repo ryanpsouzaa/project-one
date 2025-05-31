@@ -1,3 +1,5 @@
+from importlib.resources import contents
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django import forms
@@ -10,37 +12,31 @@ import markdown2
 import random
 
 
-
 def index(request):
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries(),
     })
 
-class NewPageForm(forms.Form):
-    title = forms.CharField(label="Title")
-    content = forms.CharField(label="Content",widget=forms.Textarea)
-
 def new_page(request):
     if request.method == "POST":
-        form = NewPageForm(request.POST)
-        if form.is_valid():
-            title = form.cleaned_data["title"]
-            if title in util.list_entries():
-                return render(request, "encyclopedia/create-page.html", {
-                    "form" : form,
-                    "erro" : f"Title: {title} is already created"
-                })
-            content = form.cleaned_data["content"]
-            util.save_entry(title, content)
-            #redirecionamento
-            return redirect("encyclopedia:get_page", title=title)
-        else:
+        title = request.POST.get("title")
+        content = request.POST.get("content")
+        if not title.strip() or not content.strip():
             return render(request, "encyclopedia/create-page.html", {
-                "form": form
+                "error" : "Title and Content cannot be empty",
+                "title" : title,
+                "content" : content
             })
-    return render(request, "encyclopedia/create-page.html", {
-        "form": NewPageForm()
-    })
+        if title in util.list_entries():
+            return render(request, "encyclopedia/create-page.html", {
+                "error" : f"Title: {title} is already created",
+                "title" : title,
+                "content" : request.POST.get("content")
+            })
+        util.save_entry(title, content)
+        return redirect("encyclopedia:get_page", title=title)
+    else:
+        return render(request, "encyclopedia/create-page.html")
 
 def get_page(request, title):
     page_markdown = util.get_entry(title)
@@ -53,9 +49,11 @@ def get_page(request, title):
             "page_content": page_html,
         })
 
+
 def search(request):
     title = request.GET.get("q")
     return redirect("encyclopedia:get_page", title=title)
+
 
 def similar_search(request, title):
     similar_search = []
@@ -65,37 +63,35 @@ def similar_search(request, title):
 
     if len(similar_search) == 0:
         return render(request, "encyclopedia/error.html", {
-            "error" : f"Page {title} not found"
+            "error": f"Page {title} not found"
         })
 
     else:
         return render(request, "encyclopedia/similar-search.html", {
-            "similar_entries" : similar_search
+            "similar_entries": similar_search
         })
+
 
 def edit_page(request, title):
     if request.method == "POST":
-        form = NewPageForm(request.POST)
-        if form.is_valid():
-            content = form.cleaned_data["content"]
-            util.save_entry(title, content)
-            return redirect("encyclopedia:get_page", title=title)
+        content = request.POST.get("content")
+        if not content.strip():
+            return render(request, "encyclopedia/edit-page.html", {
+                "error" : "Content cannot be empty",
+                "content" : util.get_entry(title),
+                "title" : title
+            })
+        util.save_entry(title, content)
+        return redirect("encyclopedia:get_page", title=title)
 
     else:
         content = util.get_entry(title)
-        form = NewPageForm(initial={"title": title, "content": content})
         return render(request, "encyclopedia/edit-page.html", {
             "title": title,
-            "form": form
+            "content" : content
         })
-
+#todo editar edit-page, create-page e estilizar o resto
 def random_page(request):
     list_entries = util.list_entries()
     choice = random.choice(list_entries)
     return redirect("encyclopedia:get_page", title=choice)
-
-
-
-
-
-
